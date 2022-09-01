@@ -131,6 +131,11 @@ def retrieveEntry():
         showPass_label['font'] = smallFont
         softwareDNE_Label = tk.Label(topRetrieveEntry, textvariable = softwareDNE_StringVar, fg='#FF0000')
         softwareDNE_Label.place(relx = .3, rely = .6, relwidth = .4, relheight = .1)
+
+        # Copy password button
+        copy_Button = tk.Button(topRetrieveEntry, text="Copy", command=utils.copy2clip(password), bg = '#FFBF00')
+        copy_Button.place(relx=.45, rely=.5, relwidth=.1, relheight=.05)
+        copy_Button['font'] = tinyFont
     # Section 1 (what software is it)
     software2_label = tk.Label(topRetrieveEntry, text = "Software: ")
     software2_label.place(relx = .1, rely = .1)
