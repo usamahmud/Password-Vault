@@ -18,6 +18,7 @@ canvas = tk.Canvas(height = HEIGHT, width = WIDTH)
 canvas.pack()
 
 # Defining font
+tinyFont = font.Font(family='Helvtica', size=10)
 smallFont = font.Font(family='Helvtica', size=18)
 bigFont = font.Font(family='Helvtica', size=24)
 
@@ -72,7 +73,7 @@ def newEntry():
     topNewEntry.title("New Entry")
     # Put info in dictionary
     def storeData():
-        software = software_entry.get()
+        software = software_entry.get().lower()
         username = username_entry.get()
         password = password_entry.get()
         if software != '' and username != '' and password != '':
@@ -109,7 +110,7 @@ def retrieveEntry():
     topRetrieveEntry = tk.Toplevel(height = HEIGHT, width = WIDTH)
     topRetrieveEntry.title("Retrieve Entry")
     def getData():
-        software = software2_entry.get()
+        software = software2_entry.get().lower()
         if software in pass_dict:
             username = pass_dict[software][0]
             password = pass_dict[software][1]
@@ -160,7 +161,7 @@ def homePageAfterEnter(inputted_pass):
 
     def generateRandomPass():
         # Creates list of characters that can be used to generate a password
-        chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()-_`~?,.<>;:'+=/{}[]|"
+        chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^*()-_`~?,.;:'+=/[]"
         passwordlength = random.randrange(12, 20)
         password = ""
         for x in range(0, passwordlength):
@@ -168,6 +169,10 @@ def homePageAfterEnter(inputted_pass):
             password = password + nextchar
         text_Label1 = tk.Label(homePage, text="Generated Password: "+password, fg='#FF0000')
         text_Label1.place(relx=.15, rely=.85, relwidth=.7, relheight=.05)
+        # Copy Generated Password button
+        copy_Button = tk.Button(homePage, text="Copy", command=utils.copy2clip(password), bg = '#FFBF00')
+        copy_Button.place(relx=.45, rely=.9, relwidth=.1, relheight=.05)
+        copy_Button['font'] = tinyFont
     # Welcome label
     welcome_Label = tk.Label(homePage, text = "Welcome to Password Locker!")
     welcome_Label.place(relx = .05, rely = .05, relwidth = .9, relheight = .1)
